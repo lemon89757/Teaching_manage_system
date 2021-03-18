@@ -1,8 +1,9 @@
 class People(object):
-    def __init__(self, name):
-        self._id_number = 0
+    def __init__(self, name, id_number, password, people_type):
+        self._id_number = id_number
         self._name = name
-        self._password = None
+        self._password = password
+        self._type = people_type
 
     @property
     def id_number(self):
@@ -28,4 +29,13 @@ class People(object):
     def password(self, password):
         # 初始设置和修改密码
         self.password = password
+
+    @property
+    def people_type(self):
+        return self.people_type
+
+    @people_type.setter
+    def people_type(self, people_type):
+        self._type = people_type
+
 

@@ -1,10 +1,10 @@
 class Lesson(object):
-    def __init__(self, lesson_name, teacher):
+    def __init__(self, lesson_name, teacher_id, limit_number):
         self._name = lesson_name
-        self._teacher = teacher
-        self._student = []
-        self._number_student = 0
-        self._limit_number = 0
+        self._teacher_id = teacher_id
+        self._students = []
+        self._number_students = 0
+        self._limit_number = limit_number
 
     @property
     def name(self):
@@ -15,25 +15,29 @@ class Lesson(object):
         self._name = name
 
     @property
-    def teacher(self):
-        return self._teacher
+    def teacher_id(self):
+        return self._teacher_id
 
-    @teacher.setter
-    def teacher(self, teacher):
-        self._teacher = teacher
-
-    @property
-    def student(self):
-        return self._student
-
-    # 添加学生id
-    def add_student(self, student_id):
-        self._student.append(student_id)
+    @teacher_id.setter
+    def teacher_id(self, teacher_id):
+        self._teacher_id = teacher_id
 
     @property
-    def number_student(self):
-        self._number_student = len(self._student)
-        return self._number_student
+    def students(self):
+        return self._students
+
+    @students.setter
+    def students(self, students):
+        self._students = students
+
+    # # 添加是学生id
+    # def add_student(self, student_id):
+    #     self._students.append(student_id)
+
+    @property
+    def number_students(self):
+        self._number_students = len(self._students)
+        return self._number_students
 
     @property
     def limit_number(self):
