@@ -28,7 +28,7 @@ class People(object):
     @password.setter
     def password(self, password):
         # 初始设置和修改密码
-        self.password = password
+        self._password = password
 
     @property
     def people_type(self):

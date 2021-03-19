@@ -53,10 +53,16 @@ class ManagerLessons:
 
     def cancel_lesson(self, lesson_name, teacher_id):  # 需要保存
         if self._person.people_type == "Teacher":
+            reference = len(self._lessons)
+            through_lessons_number = 0
             for lesson in self._lessons:  # lesson为实例化的Lesson
                 if lesson.name == lesson_name and lesson.teacher_id == teacher_id:
                     # == 条件
                     self._lessons.remove(lesson)
+                else:
+                    through_lessons_number += 1
+            if reference == through_lessons_number:
+                raise ValueError
         else:
             pass
 
@@ -68,6 +74,7 @@ class ManagerLessons:
                 return name
 
     def find_students_by_teacher_lesson(self, lesson_name, teacher_id):
+        #  当任课老师没有此课程时返回值是None，有课程但没人选时返回[]
         if self._person.people_type == "Teacher":
             students_name = []
             for lesson in self._lessons:
@@ -83,20 +90,33 @@ class ManagerLessons:
         if self._person.people_type == "Student":
             available_lessons = []
             for lesson in self._lessons:
-                if lesson.students < lesson.limit_number:
+                if lesson.number_students < lesson.limit_number:
                     available_lesson = [lesson.name, lesson.teacher_id, lesson.limit_number, lesson.number_students]
                     available_lessons.append(available_lesson)
             return available_lessons
         else:
             pass
 
+    def check_choose_lesson(self, lesson_name, teacher_id, student_id):
+        for lesson in self._lessons:
+            if lesson.name == lesson_name and lesson.teacher_id == teacher_id:
+                if student_id in lesson.students:
+                    raise TypeError
+
     def choose_lesson(self, lesson_name, teacher_id, student_id):  # 需要保存
         if self._person.people_type == "Student":
+            lessons_number = 0
             for lesson in self._lessons:
                 if lesson.name == lesson_name and lesson.teacher_id == teacher_id:
                     lesson.students.append(student_id)
+                else:
+                    lessons_number += 1
+            if lessons_number == len(self._lessons):
+                raise ValueError
         else:
             pass
+
+    # def cancel_choose_lesson
 
     def find_teach_lessons_by_teacher_id(self, id_number):
         if self._person.people_type == "Teacher":
@@ -157,10 +177,24 @@ class ManagerPeoples:
         peoples_id_number = []
         for people in self._peoples:
             peoples_id_number.append(people.id_number)
-            if id_number in peoples_id_number:
-                return False
-            else:
-                return True
+        if id_number in peoples_id_number:
+            return False
+        else:
+            return True
+
+    def check_password(self, id_number, password):
+        for people in self._peoples:
+            if people.id_number == id_number:
+                if people.password == password:
+                    return 1
+                else:
+                    return 2
+
+    def find_person_by_id(self, id_number):
+        #  通过id找人
+        for person in self._peoples:
+            if id_number == person.id_number:
+                return person
 
     def save_peoples(self):
         #  将对象转换为json文件中的相应格式
