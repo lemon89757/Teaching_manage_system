@@ -1,8 +1,8 @@
 import json
-from lesson import Lesson
-from people import People
+from entity.lesson import Lesson
+from .people import People
 
-file_path = r'C:\Users\helloTt\Desktop\tt\2021上半学期（电科）\learning_project\system_student_manage\data'
+file_path = r'C:\Users\helloTt\Desktop\tt\2021上半学期（电科）\learning_project\Teaching_manage_system\data.json'
 
 
 def load_lessons():
@@ -30,9 +30,7 @@ def load_peoples():
             data_json = json.load(file)
             lessons = data_json["lessons"]
         for data in data_json["peoples"]:
-            people = People(data[1]["name"], data[0]["ID"])
-            people.password = data[2]["password"]
-            people.people_type = data[3]["type"]
+            people = People(data[1]["name"], data[0]["ID"], data[2]["password"], data[3]["type"])
             peoples.append(people)
         return peoples, lessons
     except json.decoder.JSONDecodeError:
@@ -140,12 +138,12 @@ class ManagerLessons:
         data = dict()
         data["lessons"] = lessons
         data["peoples"] = peoples
-        data_json = json.dumps(data, intend=4)
+        data_json = json.dumps(data)
         with open(file_path, 'w') as file:
             file.write(data_json)
 
 
-class ManagerPeople:
+class ManagerPeoples:
     def __init__(self):
         self._peoples = load_peoples()[0]
         self._lessons = load_peoples()[1]
@@ -153,15 +151,16 @@ class ManagerPeople:
     def add_people(self, name, id_number, password, people_type):  # 需要保存
         people = People(name, id_number, password, people_type)
         self._peoples.append(people)
+        self.save_peoples()
 
     def check_people_in(self, id_number):
         peoples_id_number = []
         for people in self._peoples:
             peoples_id_number.append(people.id_number)
             if id_number in peoples_id_number:
-                return True
-            else:
                 return False
+            else:
+                return True
 
     def save_peoples(self):
         #  将对象转换为json文件中的相应格式
@@ -173,6 +172,6 @@ class ManagerPeople:
         data = dict()
         data["lessons"] = self._lessons
         data["peoples"] = peoples
-        data_json = json.dumps(data, intend=4)
+        data_json = json.dumps(data)
         with open(file_path, 'w') as file:
             file.write(data_json)

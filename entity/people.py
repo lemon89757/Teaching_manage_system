@@ -32,7 +32,7 @@ class People(object):
 
     @property
     def people_type(self):
-        return self.people_type
+        return self._type
 
     @people_type.setter
     def people_type(self, people_type):
