@@ -31,32 +31,32 @@ class Params():
         return self.__dict__
 
 
-# if __name__ == '__main__':
-    # data = dict()
-    # data["lessons"] = [[{"课程名": ''}, {"任课老师": ''}, {"选课人数上限": 0}, {"选课学生": []}, {"选课学生人数": 0}]]
-    # data["teachers"] = [[{"姓名": ''}, {"ID": 0}, {"password": None}, {"所教课程相关信息": [[{'课程名': ''}, {"选课人数上限": 0},
-    #                                                                               {'选课学生': []}, {"选课学生人数": 0}]]}]]
-    # data["students"] = [[{"姓名": ''}, {"ID": 0}, {"password": None}, {"所选课程相关信息": [[{'课程名': ''}, {"任课老师": ''},
-    #                                                                                {"选课人数上限": 0}, {"选课学生人数": 0}]]}]]
-    # data["administrators"] = [[{"姓名": ''}, {"ID": 0}, {"password": None}]]
-    # json_str = json.dumps(data, indent=4)
-    #
-    # with open('params.json', 'w') as f:  # 创建一个params.json文件
-    #     f.write(json_str)  # 将json_str写到文件中
+if __name__ == '__main__':
+    data = dict()
+    data["lessons"] = [[{"课程名": ''}, {"任课老师": ''}, {"选课人数上限": 0}, {"选课学生": []}, {"选课学生人数": 0}]]
+    data["teachers"] = [[{"姓名": ''}, {"ID": 0}, {"password": None}, {"所教课程相关信息": [[{'课程名': ''}, {"选课人数上限": 0},
+                                                                                  {'选课学生': []}, {"选课学生人数": 0}]]}]]
+    data["students"] = [[{"姓名": ''}, {"ID": 0}, {"password": None}, {"所选课程相关信息": [[{'课程名': ''}, {"任课老师": ''},
+                                                                                   {"选课人数上限": 0}, {"选课学生人数": 0}]]}]]
+    data["administrators"] = [[{"姓名": ''}, {"ID": 0}, {"password": None}]]
+    json_str = json.dumps(data, indent=4)  # ???? 中文才会转换成乱码
+
+    with open('params.json', 'w') as f:  # 创建一个params.json文件
+        f.write(json_str)  # 将json_str写到文件中
     #
     # params = Params('params.json')
     # # params.SEED = 5   # 修改json中的数据
     # params.save('params.json')  # 将修改后的数据保存
     # print(params.dict)
-if __name__ == '__main__':
-    def get_data():
-        try:
-            with open('params.json') as file:
-                data_msg = json.load(file)
-            return data_msg
-        except json.decoder.JSONDecodeError:
-            return {'lessons': ''}
-
-    lessons = get_data()['lessons']
+# if __name__ == '__main__':
+#     def get_data():
+#         try:
+#             with open('params.json') as file:
+#                 data_msg = json.load(file)
+#             return data_msg
+#         except json.decoder.JSONDecodeError:
+#             return {'lessons': ''}
+#
+#     lessons = get_data()['lessons']
 
 

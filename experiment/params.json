@@ -1,0 +1,96 @@
+{
+    "lessons": [
+        [
+            {
+                "\u8bfe\u7a0b\u540d": ""
+            },
+            {
+                "\u4efb\u8bfe\u8001\u5e08": ""
+            },
+            {
+                "\u9009\u8bfe\u4eba\u6570\u4e0a\u9650": 0
+            },
+            {
+                "\u9009\u8bfe\u5b66\u751f": []
+            },
+            {
+                "\u9009\u8bfe\u5b66\u751f\u4eba\u6570": 0
+            }
+        ]
+    ],
+    "teachers": [
+        [
+            {
+                "\u59d3\u540d": ""
+            },
+            {
+                "ID": 0
+            },
+            {
+                "password": null
+            },
+            {
+                "\u6240\u6559\u8bfe\u7a0b\u76f8\u5173\u4fe1\u606f": [
+                    [
+                        {
+                            "\u8bfe\u7a0b\u540d": ""
+                        },
+                        {
+                            "\u9009\u8bfe\u4eba\u6570\u4e0a\u9650": 0
+                        },
+                        {
+                            "\u9009\u8bfe\u5b66\u751f": []
+                        },
+                        {
+                            "\u9009\u8bfe\u5b66\u751f\u4eba\u6570": 0
+                        }
+                    ]
+                ]
+            }
+        ]
+    ],
+    "students": [
+        [
+            {
+                "\u59d3\u540d": ""
+            },
+            {
+                "ID": 0
+            },
+            {
+                "password": null
+            },
+            {
+                "\u6240\u9009\u8bfe\u7a0b\u76f8\u5173\u4fe1\u606f": [
+                    [
+                        {
+                            "\u8bfe\u7a0b\u540d": ""
+                        },
+                        {
+                            "\u4efb\u8bfe\u8001\u5e08": ""
+                        },
+                        {
+                            "\u9009\u8bfe\u4eba\u6570\u4e0a\u9650": 0
+                        },
+                        {
+                            "\u9009\u8bfe\u5b66\u751f\u4eba\u6570": 0
+                        }
+                    ]
+                ]
+            }
+        ]
+    ],
+    "administrators": [
+        [
+            {
+                "\u59d3\u540d": ""
+            },
+            {
+                "ID": 0
+            },
+            {
+                "password": null
+            }
+        ]
+    ]
+}
