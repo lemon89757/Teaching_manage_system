@@ -24,7 +24,7 @@ class Land:
                 land_msg = ["密码错误", "no"]
                 return land_msg
         else:
-            raise ValueError
+            raise LookupError
 
     def get_name(self):
         if not manage_peoples.check_people_in(self._id_number):

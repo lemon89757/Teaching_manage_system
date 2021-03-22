@@ -12,12 +12,12 @@ class Register:
 
     @staticmethod
     def view_people_type():
-        return ["Teacher", "Student"]
+        return ["Teacher", "Student"]  # 注意类型的来源
 
-    def get_people_type(self):
+    def check_people_type(self):
         people_type = input("请选择人员类型")
         if people_type not in ["Teacher", "Student"]:
-            raise ValueError
+            raise TypeError
         else:
             self._type = people_type
 
@@ -25,4 +25,4 @@ class Register:
         if manager.check_people_in(self._id):
             manager.add_people(self._name, self._id, self._password, self._type)
         else:
-            raise ValueError
+            raise LookupError
