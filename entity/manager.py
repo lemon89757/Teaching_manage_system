@@ -171,6 +171,7 @@ class ManagerPeoples:
     def add_people(self, name, id_number, password, people_type):  # 需要保存
         people = People(name, id_number, password, people_type)
         self._peoples.append(people)
+        self.save_peoples()
 
     def check_people_in(self, id_number):
         peoples_id_number = []
