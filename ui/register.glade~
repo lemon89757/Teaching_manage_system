@@ -134,7 +134,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBox" id="operation_combo">
+              <object class="GtkComboBox" id="choose_type_combobox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
               </object>

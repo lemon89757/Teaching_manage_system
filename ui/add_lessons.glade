@@ -19,6 +19,7 @@
               <object class="GtkLabel" id="welcome_label">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="halign">start</property>
                 <property name="label" translatable="yes">欢迎您，。。。</property>
               </object>
               <packing>

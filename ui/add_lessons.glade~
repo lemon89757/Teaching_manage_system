@@ -38,6 +38,7 @@
           <object class="GtkBox" id="lesson_title_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="margin-end">175</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkLabel" id="lessons_name_label">
@@ -62,9 +63,6 @@
                 <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
           </object>
           <packing>
