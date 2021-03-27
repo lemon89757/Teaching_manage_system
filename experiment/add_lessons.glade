@@ -11,31 +11,21 @@
         <property name="orientation">vertical</property>
         <property name="homogeneous">True</property>
         <child>
-          <object class="GtkBox" id="ID_box">
+          <object class="GtkBox" id="welcome_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="homogeneous">True</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkLabel" id="id_label">
+              <object class="GtkLabel" id="welcome_label">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">ID</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">欢迎您，。。。</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="id_entry">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
               </packing>
             </child>
           </object>
@@ -46,15 +36,16 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="password_box">
+          <object class="GtkBox" id="lesson_title_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="margin-end">175</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkLabel" id="password_label">
+              <object class="GtkLabel" id="lessons_name_label">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">password</property>
+                <property name="label" translatable="yes">添加课程名称</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -63,11 +54,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="password_entry">
+              <object class="GtkLabel" id="limit_number_lablel">
                 <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="visibility">False</property>
-                <property name="invisible-char">●</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">限制人数</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -83,16 +73,14 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="login_register_box">
+          <object class="GtkBox" id="lesson_msg_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkButton" id="login_button">
-                <property name="label" translatable="yes">登陆</property>
+              <object class="GtkEntry" id="add_lesson_name_entry">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -101,8 +89,19 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="register_button">
-                <property name="label" translatable="yes">注册</property>
+              <object class="GtkEntry" id="limit_number_entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="confirm_button">
+                <property name="label" translatable="yes">确定</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -110,7 +109,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
