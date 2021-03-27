@@ -15,11 +15,11 @@ class Register:
         return ["Teacher", "Student"]  # 注意类型的来源
 
     def check_people_type(self, person_type):
-        # people_type = input("请选择人员类型")
-        # if people_type not in ["Teacher", "Student"]:
-        #     raise TypeError
-        # else:
-        self._type = person_type
+        people_type = input("请选择人员类型")
+        if people_type not in ["Teacher", "Student"]:
+            raise TypeError
+        else:
+            self._type = person_type
 
     def registering(self):
         if manager.check_people_in(self._id):

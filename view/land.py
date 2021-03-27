@@ -14,6 +14,7 @@ class Land:
             tag = manage_peoples.check_password(self._id_number, self._password)
             if tag == 1:
                 person = manage_peoples.find_person_by_id(self._id_number)
+                # return person
                 if person.people_type == "Teacher":
                     land_msg = ["0修改密码", "1添加课程", "2取消课程", "3查看选课学生", "4查看任教课程信息", "Q退出系统", "yes"]
                     return land_msg
@@ -23,6 +24,7 @@ class Land:
             if tag == 2:
                 land_msg = ["密码错误", "no"]
                 return land_msg
+                # raise AssertionError
         else:
             raise LookupError
 
