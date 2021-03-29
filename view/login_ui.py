@@ -1,8 +1,8 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from entity.manager import ManagerPeoples
-from entity.manager import ManagerLessons
+from usecase.manager import ManagerPeoples
+from usecase.manager import ManagerLessons
 
 student_ui_glade_file = "ui/user_students.glade"
 teacher_ui_glade_file = "ui/user_teachers.glade"

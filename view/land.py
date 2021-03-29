@@ -1,5 +1,5 @@
-from entity.manager import ManagerLessons
-from entity.manager import ManagerPeoples
+from usecase.manager import ManagerLessons
+from usecase.manager import ManagerPeoples
 
 manage_peoples = ManagerPeoples()
 

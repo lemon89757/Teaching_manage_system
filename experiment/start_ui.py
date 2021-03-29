@@ -3,8 +3,8 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from view.register import Register
 from view.land import Land
-from entity.manager import ManagerLessons
-from entity.manager import ManagerPeoples
+from usecase.manager import ManagerLessons
+from usecase.manager import ManagerPeoples
 
 
 # class RegisterWindow(Gtk.Window):  # TODO  parent = ???  周五提到的那个？
