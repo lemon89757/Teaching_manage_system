@@ -2,10 +2,10 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <object class="GtkWindow" id="main_window">
+  <object class="GtkWindow" id="student_main_window">
     <property name="can-focus">False</property>
     <child>
-      <object class="GtkBox" id="main_box">
+      <object class="GtkBox" id="student_main_box">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>

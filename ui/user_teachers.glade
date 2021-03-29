@@ -35,100 +35,31 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="lesson_msg_title_box">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="homogeneous">True</property>
-            <child>
-              <object class="GtkLabel" id="teach_lesson_name_lable">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">任教课程</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="limit_number_label">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">限制人数</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="choose_lesson_number_label">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">选课人数</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="cancel_lesson_label">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">取消课程</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkBox" id="lessons_msg_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkTreeView">
+              <object class="GtkScrolledWindow" id="teach_lessons_scrolled_window">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <child internal-child="selection">
-                  <object class="GtkTreeSelection"/>
+                <property name="shadow-type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="teach_lessons_tree_view">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                  </object>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="cancel_lesson">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="margin-end">30</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="pack-type">end</property>
-                <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">True</property>
-            <property name="fill">False</property>
+            <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
         </child>
@@ -151,8 +82,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="change_password_button">
-                <property name="label" translatable="yes">修改密码</property>
+              <object class="GtkButton" id="cancel_lesson_button">
+                <property name="label" translatable="yes">取消课程</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -164,8 +95,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="exit_button">
-                <property name="label" translatable="yes">退出系统</property>
+              <object class="GtkButton" id="change_password_button">
+                <property name="label" translatable="yes">修改密码</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -177,8 +108,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="confirm_cancel_lesson_button">
-                <property name="label" translatable="yes">确定</property>
+              <object class="GtkButton" id="exit_button">
+                <property name="label" translatable="yes">退出系统</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>

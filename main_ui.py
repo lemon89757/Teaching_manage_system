@@ -42,12 +42,20 @@ class MainWindow(Gtk.Window):
 
     def login(self, widget):
         # entry init
+        # person = check()
+       # if get_person.typr():
+       #      stun
+       #  elif get_perosn.type():
+       #      teacher
         id_number_entry = self.builder.get_object("id_entry")
         id_number = id_number_entry.get_text()
         password_entry = self.builder.get_object("password_entry")
         password = password_entry.get_text()
         if self.login_ui:
-            pass   # 限制只能同时登陆一个用户
+            if self.login_ui.student_ui_builder or self.login_ui.teacher_ui_builder:
+                pass   # 限制只能同时登陆一个用户
+            else:
+                self.login_ui = LoginWindow(id_number, password)
         else:
             self.login_ui = LoginWindow(id_number, password)
 
