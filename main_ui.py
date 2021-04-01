@@ -1,8 +1,10 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from view.register_ui import RegisterWindow
-from view.login_ui import LoginWindow
+from view.register_ui import RegisterUI
+from view.login_ui import TeacherUI
+from view.login_ui import BeforeLogin
+from view.login_ui import StudentUI
 
 
 class MainWindow(Gtk.Window):
@@ -14,10 +16,6 @@ class MainWindow(Gtk.Window):
         self.window = self.builder.get_object("main_window")
         self.window.set_title("教学管理系统")
         self.window.set_icon_from_file(image_file)
-        self.person = None  # 这个是登陆用户
-        self.register_ui = None
-        self.login_ui = None
-
         self.window.set_border_width(10)
         self.window.set_default_size(300, 100)
 
@@ -33,31 +31,30 @@ class MainWindow(Gtk.Window):
         self.window.show()
 
     def register(self, widget):
-        if self.register_ui:
-            self.register_ui.register_window.reshow_with_initial_size()
-        else:
-            self.register_ui = RegisterWindow()
-            # self.register_ui.show()  , object at 0x000001fc1b376340 of type RegisterWindow is not initialized
-            # 改正：self.register_ui.register_window.show()
+        ui = RegisterUI()
+        self.window.show()
+        ui.register_window.show()
 
     def login(self, widget):
-        # entry init
-        # person = check()
-       # if get_person.typr():
-       #      stun
-       #  elif get_perosn.type():
-       #      teacher
         id_number_entry = self.builder.get_object("id_entry")
         id_number = id_number_entry.get_text()
         password_entry = self.builder.get_object("password_entry")
         password = password_entry.get_text()
-        if self.login_ui:
-            if self.login_ui.student_ui_builder or self.login_ui.teacher_ui_builder:
-                pass   # 限制只能同时登陆一个用户
-            else:
-                self.login_ui = LoginWindow(id_number, password)
-        else:
-            self.login_ui = LoginWindow(id_number, password)
+
+        before_login = BeforeLogin(id_number, password)
+        person = before_login.check()
+
+        try:
+            if person.people_type == "Teacher":
+                ui = TeacherUI(person)
+                self.window.hide()
+                ui.window.show_all()  # show_all(),show()不会显示后加入的treeview中内容
+            if person.people_type == "Student":
+                ui = StudentUI(person)
+                self.window.hide()
+                ui.window.show_all()
+        except AttributeError:
+            pass
 
 
 if __name__ == '__main__':
