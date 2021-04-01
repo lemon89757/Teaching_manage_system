@@ -2,9 +2,9 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from view.register_ui import RegisterUI
-from view.login_ui import TeacherUI
-from view.login_ui import BeforeLogin
-from view.login_ui import StudentUI
+from view.users_ui import TeacherUI
+from view.users_ui import BeforeLogin
+from view.users_ui import StudentUI
 
 
 class MainWindow(Gtk.Window):
