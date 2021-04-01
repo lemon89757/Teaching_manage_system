@@ -59,101 +59,34 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="lesson_title_box">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="margin-end">70</property>
-            <property name="homogeneous">True</property>
-            <child>
-              <object class="GtkLabel" id="lesson_name_title_label">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">课程名</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="limit_number_title_label">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">限制人数</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="choose_number_title_label">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">选课人数</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="choose_lesson_lable">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">选课</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkBox" id="avaliable_lessons_msg_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkTreeView">
+              <object class="GtkScrolledWindow" id="available_lessons_msg_scrolled_window">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <child internal-child="selection">
-                  <object class="GtkTreeSelection"/>
+                <property name="shadow-type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="available_lessons_msg_tree_view">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection"/>
+                    </child>
+                  </object>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="choose_lessons_switch">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="margin-end">90</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="pack-type">end</property>
-                <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">True</property>
-            <property name="fill">False</property>
+            <property name="fill">True</property>
             <property name="position">3</property>
           </packing>
         </child>
@@ -186,15 +119,22 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkTreeView">
+              <object class="GtkScrolledWindow" id="already_choose_scrolled_window">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <child internal-child="selection">
-                  <object class="GtkTreeSelection"/>
+                <property name="shadow-type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="already_choose_tree_view">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection"/>
+                    </child>
+                  </object>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>

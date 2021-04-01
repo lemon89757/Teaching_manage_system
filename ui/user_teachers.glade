@@ -44,10 +44,7 @@
                 <property name="can-focus">True</property>
                 <property name="shadow-type">in</property>
                 <child>
-                  <object class="GtkTreeView" id="teach_lessons_tree_view">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                  </object>
+                  <placeholder/>
                 </child>
               </object>
               <packing>

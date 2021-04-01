@@ -1,10 +1,10 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from entity.manager import ManagerPeoples
+from usecase.manager import ManagerPeoples
 
 
-class RegisterWindow(Gtk.Window):  # TODO  parent = ???  周五提到的那个？
+class RegisterUI(Gtk.Window):  # TODO  parent = ???  周五提到的那个？
     def __init__(self):
         register_glade_file = "ui/register.glade"  # ..表示返回至上级目录  未加..是表示该地址是相对于运行文件的相对地址(加会报错)，若单独运行则需要加..
         image_file = "image/school.jpg"
@@ -33,8 +33,6 @@ class RegisterWindow(Gtk.Window):  # TODO  parent = ???  周五提到的那个�
 
         cancel_button = self.register_builder.get_object("cancel_button")
         cancel_button.connect("clicked", self.close)
-
-        self.register_window.show()
 
     def close(self, widget):
         self.register_window.close()
