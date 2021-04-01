@@ -90,7 +90,7 @@ class ManagerLessons:
         if self._person.people_type == "Student":
             available_lessons = []
             for lesson in self._lessons:
-                if lesson.number_students < lesson.limit_number:
+                if lesson.number_students < lesson.limit_number and self._person.id_number not in lesson.students:
                     available_lesson = [lesson.name, lesson.teacher_id, lesson.limit_number, lesson.number_students]
                     available_lessons.append(available_lesson)
             return available_lessons
@@ -101,7 +101,7 @@ class ManagerLessons:
         for lesson in self._lessons:
             if lesson.name == lesson_name and lesson.teacher_id == teacher_id:
                 if student_id in lesson.students:
-                    raise TypeError
+                    raise AttributeError
 
     def choose_lesson(self, lesson_name, teacher_id, student_id):  # 需要保存
         if self._person.people_type == "Student":
@@ -116,13 +116,12 @@ class ManagerLessons:
         else:
             pass
 
-    def cancel_choose_lesson(self, lesson_name, teacher_id, student_id):
-        # 操作对象是find_choose_lessons_by_student_id的返回值
-        if self._person.people_type == "student":
-            choose_lessons = self.find_choose_lessons_by_student_id(student_id)
-            for lesson in choose_lessons:
-                if lesson_name == lesson[0] and teacher_id == lesson[1]:
-                    choose_lessons.remove(lesson)
+    def cancel_choose_lesson(self, lesson_name, teacher_id, student_id):  # 需要保存
+        if self._person.people_type == "Student":
+            for lesson in self._lessons:
+                if teacher_id == lesson.teacher_id and lesson_name == lesson.name:
+                    if student_id in lesson.students:
+                        lesson.students.remove(student_id)
         else:
             pass
 
@@ -153,6 +152,16 @@ class ManagerLessons:
             return choose_lessons
         else:
             pass
+
+    def find_lesson_by_lesson_name_and_teacher_id(self, lesson_name, teacher_id):
+        count = 0
+        for lesson in self._lessons:
+            if lesson_name == lesson.name and teacher_id == lesson.teacher_id:
+                return lesson
+            else:
+                count += 1
+        if count == len(self._lessons):
+            raise ValueError
 
     def save_lessons(self):
         #  将对象转换为json文件中的相应格式
@@ -194,9 +203,10 @@ class ManagerPeoples:
         for people in self._peoples:
             if people.id_number == id_number:
                 if people.password == password:
-                    return 1
+                    return True
                 else:
-                    return 2
+                    return False
+    #  改之前（命令行实现）True对应1，False对应2
 
     def find_person_by_id(self, id_number):
         #  通过id找人
@@ -217,3 +227,5 @@ class ManagerPeoples:
         data_json = json.dumps(data)
         with open(file_path, 'w') as file:
             file.write(data_json)
+
+# TODO  更新、修改、copy、deepcopy
