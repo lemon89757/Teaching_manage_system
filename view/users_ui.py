@@ -53,7 +53,7 @@ class TeacherUI(Gtk.Window):
         self._person = person
         self.add_lessons_ui = AddLessonUI(self._person)
         self.change_password_ui = ChangePasswordUI(self._person)
-        self.manage_lessons = ManagerLessons(self._person)
+        # self.manage_lessons = ManagerLessons(self._person)
 
         # label init
         welcome_label = self.builder.get_object("welcome_label")
@@ -107,7 +107,7 @@ class TeacherUI(Gtk.Window):
         tree_view.append_column(column)
 
     def create_model(self):
-        lessons = self.manage_lessons.find_teach_lessons_by_teacher_id(self._person.id_number)
+        lessons = self.add_lessons_ui.manage_lessons.find_teach_lessons_by_teacher_id(self._person.id_number)
         model = Gtk.ListStore(str, int, int)
         for lesson in lessons:
             model.append([lesson[0], lesson[1], lesson[3]])
@@ -120,8 +120,8 @@ class TeacherUI(Gtk.Window):
     def cancel_lessons(self, widget):
         try:
             lesson_name = self.activate_row[0]
-            self.manage_lessons.cancel_lesson(lesson_name, self._person.id_number)
-            self.manage_lessons.save_lessons()
+            self.add_lessons_ui.manage_lessons.cancel_lesson(lesson_name, self._person.id_number)
+            self.add_lessons_ui.manage_lessons.save_lessons()
             tree_view_model = self.teacher_lessons_tree_view.get_model()
             tree_view_model.remove(self.activate_row.iter)
             dialog = Gtk.MessageDialog(self.window, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "提示")
@@ -155,7 +155,7 @@ class TeacherUI(Gtk.Window):
 
     def add_lesson_to_tree_view(self, widget):
         teach_lessons_name = []
-        teach_lessons = self.manage_lessons.find_teach_lessons_by_teacher_id(self._person.id_number)
+        teach_lessons = self.add_lessons_ui.manage_lessons.find_teach_lessons_by_teacher_id(self._person.id_number)
         for teach_lesson in teach_lessons:
             teach_lessons_name.append(teach_lesson[0])
 
@@ -166,7 +166,7 @@ class TeacherUI(Gtk.Window):
         except ValueError:
             pass
         else:
-            if add_lesson_name in teach_lessons_name:
+            if len(teach_lessons_name) == self.add_lessons_ui.number_lessons_before_add:
                 pass
             else:
                 teacher_model = self.teacher_lessons_tree_view.get_model()
@@ -446,6 +446,7 @@ class AddLessonUI(Gtk.Window):
         self.add_lesson_name = ''
         self.limit_number = 0
         self._person = person
+        self.number_lessons_before_add = 0
         self.manage_lessons = ManagerLessons(self._person)
 
         # label init
@@ -474,6 +475,7 @@ class AddLessonUI(Gtk.Window):
         else:
             teach_lessons_name = []
             teach_lessons = self.manage_lessons.find_teach_lessons_by_teacher_id(self._person.id_number)
+            self.number_lessons_before_add = len(teach_lessons)
             for teach_lesson in teach_lessons:
                 teach_lessons_name.append(teach_lesson[0])
             if self.add_lesson_name in teach_lessons_name:
@@ -488,8 +490,6 @@ class AddLessonUI(Gtk.Window):
                 dialog.format_secondary_text("添加课程成功")
                 dialog.run()
                 dialog.destroy()
-
-# TODO 添加课程和取消课程不能同时使用
 
 # TODO self.add_lesson_window = self.add_lesson_builder.get_object("add_lesson_main_window") 删除之后再点开却是空的
 
