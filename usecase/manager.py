@@ -11,15 +11,26 @@ def load_lessons():
     try:
         with open(file_path) as file:
             data_json = json.load(file)
-            peoples = data_json["peoples"]
+            # peoples = data_json["peoples"]
         for data in data_json["lessons"]:
             lesson = Lesson(data[0]["lesson_name"], data[1]["teacher_ID"], data[2]["limit_number"])
             lesson.students = data[3]["students"]
             lessons.append(lesson)
-        return lessons, peoples
+        return lessons
     except json.decoder.JSONDecodeError:
-        peoples = []
-        return lessons, peoples
+        # peoples = []
+        return lessons
+
+
+def load_lessons_dict():
+    try:
+        with open(file_path) as file:
+            data_json = json.load(file)
+            lessons = data_json["lessons"]
+            return lessons
+    except json.decoder.JSONDecodeError:
+        lessons = []
+        return lessons
 
 
 def load_peoples():
@@ -28,20 +39,31 @@ def load_peoples():
     try:
         with open(file_path) as file:
             data_json = json.load(file)
-            lessons = data_json["lessons"]
+            # lessons = data_json["lessons"]
         for data in data_json["peoples"]:
             people = People(data[1]["name"], data[0]["ID"], data[2]["password"], data[3]["type"])
             peoples.append(people)
-        return peoples, lessons
+        return peoples
     except json.decoder.JSONDecodeError:
-        lessons = []
-        return peoples, lessons
+        # lessons = []
+        return peoples
+
+
+def load_peoples_dict():
+    try:
+        with open(file_path) as file:
+            data_json = json.load(file)
+            peoples = data_json["peoples"]
+            return peoples
+    except json.decoder.JSONDecodeError:
+        peoples = []
+        return peoples
 
 
 class ManagerLessons:
     def __init__(self, person):
-        self._lessons = load_lessons()[0]
-        self._peoples = load_lessons()[1]
+        self._lessons = load_lessons()
+        self._peoples = load_peoples_dict()
         self._person = person
 
     def add_lesson(self, lesson_name, teacher_name, limit_number):  # 需要保存
@@ -165,7 +187,7 @@ class ManagerLessons:
 
     def save_lessons(self):
         #  将对象转换为json文件中的相应格式
-        peoples = load_lessons()[1]
+        peoples = self._peoples
         lessons = []
         for lesson in self._lessons:
             a_lesson = [{"lesson_name": lesson.name}, {"teacher_ID": lesson.teacher_id},
@@ -182,8 +204,8 @@ class ManagerLessons:
 
 class ManagerPeoples:
     def __init__(self):
-        self._peoples = load_peoples()[0]
-        self._lessons = load_peoples()[1]
+        self._peoples = load_peoples()
+        self._lessons = load_lessons_dict()
 
     def add_people(self, name, id_number, password, people_type):  # 需要保存
         people = People(name, id_number, password, people_type)
@@ -214,6 +236,12 @@ class ManagerPeoples:
             if id_number == person.id_number:
                 return person
 
+    def update_modification(self, modify_person):
+        for person in self._peoples:
+            if person.id_number == modify_person.id_number:
+                person.password = modify_person.password
+        self.save_peoples()
+
     def save_peoples(self):
         #  将对象转换为json文件中的相应格式
         peoples = []
@@ -228,4 +256,4 @@ class ManagerPeoples:
         with open(file_path, 'w') as file:
             file.write(data_json)
 
-# TODO  更新、修改、copy、deepcopy
+# TODO  更新修改、copy、deepcopy
