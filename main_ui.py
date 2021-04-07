@@ -1,9 +1,9 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from usecase.manager import ManagerPeoples
 from view.register_ui import RegisterUI
 from view.users_ui import TeacherUI
-from view.users_ui import BeforeLogin
 from view.users_ui import StudentUI
 
 
@@ -30,6 +30,26 @@ class MainWindow(Gtk.Window):
         self.window.connect("delete-event", Gtk.main_quit)
         self.window.show()
 
+    def check(self, id_number, password):
+        manage_persons = ManagerPeoples()
+        try:
+            id_number = int(id_number)
+            if not manage_persons.check_people_in(id_number) and manage_persons.check_password(id_number, password):
+                person = manage_persons.find_person_by_id(id_number)
+                return person
+            else:
+                dialog = Gtk.MessageDialog(self.window, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "提示")
+                dialog.format_secondary_text("用户不存在或密码错误")
+                dialog.run()
+                dialog.destroy()
+                return None
+        except ValueError:
+            dialog = Gtk.MessageDialog(self.window, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "提示")
+            dialog.format_secondary_text("用户不存在")  # 当输入id不是数字时显示用户不存在
+            dialog.run()
+            dialog.destroy()
+            return None
+
     def register(self, widget):
         ui = RegisterUI()
         self.window.show()
@@ -41,8 +61,7 @@ class MainWindow(Gtk.Window):
         password_entry = self.builder.get_object("password_entry")
         password = password_entry.get_text()
 
-        before_login = BeforeLogin(id_number, password)
-        person = before_login.check()
+        person = self.check(id_number, password)
 
         try:
             if person.people_type == "Teacher":

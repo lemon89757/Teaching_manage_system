@@ -7,36 +7,6 @@ from usecase.manager import ManagerLessons
 image_file = "image/school.jpg"
 
 
-class BeforeLogin(Gtk.Window):
-    def __init__(self, id_number, password):
-        Gtk.Window.__init__(self, title="用户提示")
-        self.id_number = id_number
-        self.password = password
-        self.set_border_width(10)
-        self.set_default_size(200, 100)
-
-    def check(self):
-        manage_persons = ManagerPeoples()
-        try:
-            id_number = int(self.id_number)
-        except ValueError:
-            dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "提示")
-            dialog.format_secondary_text("用户不存在")  # 当输入id不是数字时显示用户不存在
-            dialog.run()
-            dialog.destroy()
-            return None
-        else:
-            if not manage_persons.check_people_in(id_number) and manage_persons.check_password(id_number, self.password):
-                person = manage_persons.find_person_by_id(id_number)
-                return person
-            else:
-                dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "提示")
-                dialog.format_secondary_text("用户不存在或密码错误")
-                dialog.run()
-                dialog.destroy()
-                return None
-
-
 class TeacherUI(Gtk.Window):
     def __init__(self, person):
         teacher_ui_glade_file = "ui/user_teachers.glade"
@@ -61,10 +31,10 @@ class TeacherUI(Gtk.Window):
 
         # button init
         change_password_button = self.builder.get_object("change_password_button")
-        change_password_button.connect("clicked", self.change_password)
+        change_password_button.connect("clicked", self.show_or_hide_change_password_ui)
 
         add_lesson_button = self.builder.get_object("add_lessons_button")
-        add_lesson_button.connect("clicked", self.add_lesson)
+        add_lesson_button.connect("clicked", self.show_or_hide_add_lesson_ui)
 
         exit_button = self.builder.get_object("exit_button")
         exit_button.connect("clicked", Gtk.main_quit)
@@ -134,9 +104,9 @@ class TeacherUI(Gtk.Window):
             dialog.run()
             dialog.destroy()
         except TypeError:
-            pass
+            pass  # 未选中课程时
 
-    def change_password(self, widget):
+    def show_or_hide_change_password_ui(self, widget):
         if not self.change_password_ui.window_state:
             self.change_password_ui.window.show_all()
             self.change_password_ui.window_state = True
@@ -144,8 +114,7 @@ class TeacherUI(Gtk.Window):
             self.change_password_ui.window.hide()
             self.change_password_ui.window_state = False
 
-# TODO
-    def add_lesson(self, widget):
+    def show_or_hide_add_lesson_ui(self, widget):
         if not self.add_lessons_ui.window_state:
             self.add_lessons_ui.window.show_all()
             self.add_lessons_ui.window_state = True
@@ -246,7 +215,7 @@ class StudentUI(Gtk.Window):
         tree_view.append_column(column)
 
         renderer_text = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn("任课老师", renderer_text, text=1)
+        column = Gtk.TreeViewColumn("任课老师ID", renderer_text, text=1)
         column.set_sort_column_id(1)
         tree_view.append_column(column)
 
